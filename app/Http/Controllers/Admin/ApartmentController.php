@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
+use App\Models\Service;
 
 class ApartmentController extends Controller
 {
@@ -49,7 +50,8 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        return view('admin.apartments.edit');
+        $services = Service::all();
+        return view('admin.apartments.edit', compact('apartment', 'services'));
     }
 
     /**
@@ -57,7 +59,13 @@ class ApartmentController extends Controller
      */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
-        //
+        $data = $request->all();
+
+        $apartment->update($data);
+
+        $apartment->services()->sync($request->services);
+
+        return redirect()->route('admin.apartments.show', $apartment->id)->with('message', 'Project modified correctly!!');
     }
 
     /**

@@ -1,6 +1,15 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container-fluid">
+        @if (session('message'))
+            <div class="row">
+                <div class="col my-3">
+                    <div class="alert alert-success">
+                        {{ session('message') }}
+                    </div>
+                </div>
+            </div>
+        @endif
         <div class="row">
             <div class="col my-3">
                 <a href="{{ route('admin.apartments.index') }}">
@@ -23,10 +32,15 @@
                                 <p class="card-text">{{ $apartment->description }}</p>
                                 <div class="my-3 d-flex align-items-center">
                                     <h5><strong>Servizi:</strong></h5>
-                                    @foreach ($apartment->services as $service)
-                                        <span class="ms-3 badge text-bg-primary rounded-pill">{{ $service->name }}
+                                    @if ($apartment->services->isEmpty())
+                                        <span class="ms-3 badge text-bg-primary rounded-pill">Nulla
                                         </span>
-                                    @endforeach
+                                    @else
+                                        @foreach ($apartment->services as $service)
+                                            <span class="ms-3 badge text-bg-primary rounded-pill">{{ $service->name }}
+                                            </span>
+                                        @endforeach
+                                    @endif
                                 </div>
                                 <div>
                                     <ul class="list-group">

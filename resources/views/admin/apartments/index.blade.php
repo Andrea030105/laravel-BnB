@@ -43,14 +43,15 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#">
+                                    <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment->id]) }}">
                                         <button class="ms-2 btn btn-square btn-warning">
                                             <i class="fa-solid fa-pencil"></i>
                                         </button>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <form action="#" method="POST">
+                                    <form action="{{ route('admin.apartments.destroy', ['apartment' => $apartment->id]) }}"
+                                        method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="ms-2 btn btn-square btn-danger">
