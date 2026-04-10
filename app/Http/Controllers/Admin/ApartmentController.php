@@ -65,7 +65,7 @@ class ApartmentController extends Controller
 
         $apartment->services()->sync($request->services);
 
-        return redirect()->route('admin.apartments.show', $apartment->id)->with('message', 'Project modified correctly!!');
+        return redirect()->route('admin.apartments.show', $apartment->id)->with('message', 'Appartamento modificato correttamente!!');
     }
 
     /**
