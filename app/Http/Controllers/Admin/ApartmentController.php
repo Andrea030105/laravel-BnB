@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Apartment;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
@@ -43,6 +44,8 @@ class ApartmentController extends Controller
         if ($request->hasFile('image')) {
             $data['image'] = Storage::disk('public')->put('uploads', $request->file('image'));
         }
+
+        $data['slug'] = Str::slug($data['title'], '-');
 
         $newApartment = Apartment::create($data);
         $newApartment->services()->sync($request->input('services', []));
