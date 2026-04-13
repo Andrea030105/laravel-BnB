@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use App\Models\Apartment;
+use Illuminate\Support\Facades\Storage;
+
 use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
 use App\Models\Service;
@@ -25,7 +27,9 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        return view('admin.apartments.create');
+        $services = Service::all();
+
+        return view('admin.apartments.create', compact('services'));
     }
 
     /**
@@ -33,7 +37,18 @@ class ApartmentController extends Controller
      */
     public function store(StoreApartmentRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        // Se c'è un'immagine, salva il percorso in $data
+        if ($request->hasFile('image')) {
+            $data['image'] = Storage::disk('public')->put('uploads', $request->file('image'));
+        }
+
+        $newApartment = Apartment::create($data);
+        $newApartment->services()->sync($request->input('services', []));
+
+
+        return redirect()->route('admin.apartments.show', $newApartment->id);
     }
 
     /**
@@ -59,9 +74,7 @@ class ApartmentController extends Controller
      */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
-        $data = $request->all();
-
-        $apartment->update($data);
+        $apartment->update($request->validated());
 
         $apartment->services()->sync($request->services);
 
@@ -73,6 +86,7 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
-        //
+        $apartment->delete();
+        return redirect()->route(('admin.apartments.index'))->with('message', 'Appartamento cancellato corretamente!!');
     }
 }

@@ -24,7 +24,8 @@
                 <div class="card">
                     <div class="row g-0">
                         <div class="col-md-4 p-2">
-                            <img src="https://picsum.photos/200/300" class="img-fluid rounded-1" alt="...">
+                            <img src="{{ asset('storage/' . $apartment->image) }}" class="img-fluid rounded-1"
+                                alt="...">
                         </div>
                         <div class="col-md-8 d-flex justify-content-center align-items-center">
                             <div class="card-body">
