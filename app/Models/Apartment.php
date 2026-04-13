@@ -17,6 +17,8 @@ class Apartment extends Model
         'bedrooms',
         'square_meters',
         'address',
+        'latitude',
+        'longitude',
         'image',
         'price_per_night',
         'visibility',

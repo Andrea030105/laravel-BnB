@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+
 use App\Models\Apartment;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -91,5 +94,23 @@ class ApartmentController extends Controller
     {
         $apartment->delete();
         return redirect()->route(('admin.apartments.index'))->with('message', 'Appartamento cancellato corretamente!!');
+    }
+
+    public function geocode(Request $request)
+    {
+        $response = Http::withoutVerifying()->get('https://api.tomtom.com/search/2/geocode/' . urlencode($request->query('address')) . '.json', [
+            'key' => env('TOMTOM_API_KEY'),
+        ]);
+
+        $data = $response->json();
+
+        if (empty($data['results'])) {
+            return response()->json(['error' => 'Indirizzo non trovato'], 404);
+        }
+
+        return response()->json([
+            'lat' => $data['results'][0]['position']['lat'],
+            'lon' => $data['results'][0]['position']['lon'],
+        ]);
     }
 }

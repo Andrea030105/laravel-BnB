@@ -12,6 +12,7 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('apartments', ApartmentController::class);
+    Route::get('/geocode', [ApartmentController::class, 'geocode'])->name('geocode');
 });
 
 Route::middleware('auth')->group(function () {
