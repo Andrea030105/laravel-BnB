@@ -36,17 +36,21 @@
                         <div class="card-header">
                             <ul class="nav nav-pills card-header-pills">
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.apartments.show', ['apartment' => $apartment->id]) }}">
-                                        <button class="ms-2 btn btn-square btn-primary">
-                                            <i class="fa-solid fa-eye"></i>
-                                        </button>
+                                    <a class="ms-2 btn btn-square btn-primary"
+                                        href="{{ route('admin.apartments.show', ['apartment' => $apartment->id]) }}">
+                                        <i class="fa-solid fa-eye"></i>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment->id]) }}">
-                                        <button class="ms-2 btn btn-square btn-warning">
-                                            <i class="fa-solid fa-pencil"></i>
-                                        </button>
+                                    <a class="ms-2 btn btn-square btn-warning"
+                                        href="{{ route('admin.apartments.edit', ['apartment' => $apartment->id]) }}">
+                                        <i class="fa-solid fa-pencil"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="ms-2 btn btn-square btn-success"
+                                        href="{{ route('admin.messages.index', ['apartment' => $apartment->id]) }}">
+                                        <i class="fa-solid fa-message"></i>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -64,7 +68,7 @@
                         <div class="row g-0">
                             <div class="col-md-4 p-2">
                                 <img src="{{ asset('storage/' . $apartment->image) }}" class="img-fluid rounded-1"
-                                    alt="...">
+                                    alt="{{ $apartment->title }}">
                             </div>
                             <div class="col-md-8 d-flex justify-content-center align-items-center">
                                 <div class="card-body">

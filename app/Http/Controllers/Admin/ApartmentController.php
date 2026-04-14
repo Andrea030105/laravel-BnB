@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
 use App\Models\Service;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
 
 class ApartmentController extends Controller
 {
@@ -80,7 +81,17 @@ class ApartmentController extends Controller
      */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
-        $apartment->update($request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            Storage::disk('public')->delete($apartment->image);
+            $data['image'] = Storage::disk('public')->put('uploads', $request->file('image'));
+        }
+
+
+        $data['slug'] = Str::slug($data['title'], '-');
+
+        $apartment->update($data);
 
         $apartment->services()->sync($request->services);
 

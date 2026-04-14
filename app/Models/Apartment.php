@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Services;
+use App\Models\Service;
+use App\Models\Message;
 
 class Apartment extends Model
 {
@@ -27,5 +28,10 @@ class Apartment extends Model
     public function services()
     {
         return $this->belongsToMany(Service::class);
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
     }
 }
