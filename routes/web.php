@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\SponsorController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -14,6 +15,8 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('apartments', ApartmentController::class);
     Route::resource('messages', MessageController::class);
+    Route::get('/sponsors/payment', [SponsorController::class, 'payment'])->name('sponsors.payment');
+    Route::resource('sponsors', SponsorController::class);
     Route::get('/geocode', [ApartmentController::class, 'geocode'])->name('geocode');
 });
 

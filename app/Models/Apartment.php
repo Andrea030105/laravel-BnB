@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Service;
 use App\Models\Message;
+use App\Models\Sponsor;
 
 class Apartment extends Model
 {
@@ -33,5 +34,11 @@ class Apartment extends Model
     public function messages()
     {
         return $this->hasMany(Message::class);
+    }
+
+    public function sponsors()
+    {
+        return $this->belongsToMany(Sponsor::class)
+            ->withPivot('activated_at', 'expires_at');
     }
 }

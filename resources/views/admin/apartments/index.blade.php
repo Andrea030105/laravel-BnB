@@ -33,7 +33,7 @@
             @forelse ($apartments as $apartment)
                 <div class="col-12 my-3">
                     <div class="card text-center">
-                        <div class="card-header">
+                        <div class="card-header d-flex justify-content-between">
                             <ul class="nav nav-pills card-header-pills">
                                 <li class="nav-item">
                                     <a class="ms-2 btn btn-square btn-primary"
@@ -62,6 +62,22 @@
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     </form>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-pills card-header-pills">
+                                <li class="nav-item">
+                                    <a class="ms-2 btn btn-square btn-info"
+                                        href="{{ route('admin.sponsors.index', ['apartment' => $apartment->id]) }}">
+                                        <i class="fa-solid fa-credit-card"></i>
+                                        <span>Sponsor</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="ms-2 btn btn-square btn-danger"
+                                        href="{{ route('admin.apartments.show', ['apartment' => $apartment->id]) }}">
+                                        <i class="fa-solid fa-chart-column"></i>
+                                        <span>Stats</span>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
