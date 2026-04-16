@@ -9,6 +9,7 @@
         "php": "^8.3",
         "braintree/braintree_php": "^6.32",
         "laravel/framework": "^13.0",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^3.0",
         "pacificdev/laravel_9_preset": "^1.3"
     },
