@@ -16,4 +16,19 @@ class ApartmentController extends Controller
             'apartments' => $apartments,
         ]);
     }
+    public function show($slug)
+    {
+        $apartment = Apartment::with(['services', 'sponsors'])->where('slug', $slug)->first();
+        if ($apartment) {
+            return response()->json([
+                'success' => true,
+                'apartment' => $apartment,
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'error' => 'Nessun Appartamento trovato!!',
+            ]);
+        }
+    }
 }
