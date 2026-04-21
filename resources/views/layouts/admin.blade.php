@@ -53,24 +53,20 @@
                     <div class="position-sticky pt-3">
                         <ul class="nav flex-column">
                             <li class="nav-item my-2">
-                                <a class="btn btn-danger w-100 {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-secondary' : '' }}"
-                                    href="{{ route('admin.dashboard') }}">
-                                    <i class="fa-solid fa-tachometer-alt fa-lg fa-fw"></i> Dashboard
-                                </a>
-                            </li>
-                            <li class="nav-item my-2">
                                 <a class="btn btn-danger w-100 {{ Route::currentRouteName() == 'admin.apartments.index' ? 'bg-secondary' : '' }}"
                                     href="{{ route('admin.apartments.index') }}">
                                     <i class="fa-solid fa-newspaper fa-lg fa-fw"></i> Apartments
                                 </a>
                             </li>
-
+                            <li class="nav-item my-2">
+                                <a class="btn btn-danger w-100 {{ Route::currentRouteName() == 'profile' ? 'bg-secondary' : '' }}"
+                                    href="{{ url('profile') }}">
+                                    <i class="fa-solid fa-circle-user"></i> Profilo
+                                </a>
+                            </li>
                         </ul>
-
-
                     </div>
                 </nav>
-
                 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                     @yield('content')
                 </main>

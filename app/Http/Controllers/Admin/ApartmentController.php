@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
 use App\Models\Service;
+use Illuminate\Support\Facades\Auth;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
 
 class ApartmentController extends Controller
@@ -23,7 +24,9 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::all();
+        $apartments = Apartment::where('user_id', Auth::id())
+            ->orderBy('created_at', 'desc')
+            ->get();
         return view('admin.apartments.index', compact('apartments'));
     }
 
@@ -33,7 +36,6 @@ class ApartmentController extends Controller
     public function create()
     {
         $services = Service::all();
-
         return view('admin.apartments.create', compact('services'));
     }
 
@@ -43,6 +45,7 @@ class ApartmentController extends Controller
     public function store(StoreApartmentRequest $request)
     {
         $data = $request->validated();
+        $data['user_id'] = Auth::id();
 
         // Se c'è un'immagine, salva il percorso in $data
         if ($request->hasFile('image')) {
@@ -63,6 +66,7 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
+        $this->checkOwnership($apartment);
         $apartment->load('services');
         return view('admin.apartments.show', compact('apartment'));
     }
@@ -72,6 +76,7 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
+        $this->checkOwnership($apartment);
         $services = Service::all();
         return view('admin.apartments.edit', compact('apartment', 'services'));
     }
@@ -81,6 +86,7 @@ class ApartmentController extends Controller
      */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
+        $this->checkOwnership($apartment);
         $data = $request->validated();
 
         if ($request->hasFile('image')) {
@@ -103,6 +109,7 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
+        $this->checkOwnership($apartment);
         $apartment->delete();
         return redirect()->route(('admin.apartments.index'))->with('message', 'Appartamento cancellato corretamente!!');
     }
@@ -123,5 +130,11 @@ class ApartmentController extends Controller
             'lat' => $data['results'][0]['position']['lat'],
             'lon' => $data['results'][0]['position']['lon'],
         ]);
+    }
+    private function checkOwnership(Apartment $apartment)
+    {
+        if ($apartment->user_id !== Auth::id()) {
+            abort(403, 'Non autorizzato');
+        }
     }
 }
