@@ -31,4 +31,10 @@ class ApartmentController extends Controller
             ]);
         }
     }
+    public function incrementViews(Apartment $apartment)
+    {
+        $apartment->increment('views');
+
+        return response()->json(['views' => $apartment->views]);
+    }
 }

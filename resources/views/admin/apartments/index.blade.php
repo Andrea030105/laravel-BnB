@@ -74,7 +74,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="ms-2 btn btn-square btn-danger"
-                                        href="{{ route('admin.apartments.show', ['apartment' => $apartment->id]) }}">
+                                        href="{{ route('admin.stats.index', ['apartment' => $apartment->id]) }}">
                                         <i class="fa-solid fa-chart-column"></i>
                                         <span>Stats</span>
                                     </a>

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Mail\NewContact;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Log;
 
 class MessageController extends Controller
 {
@@ -39,7 +39,7 @@ class MessageController extends Controller
             Mail::to('BnB@bnbmail.com')->send(new NewContact($new_message));
         } catch (\Exception $e) {
             // il messaggio è salvato nel DB anche se la mail fallisce
-            \Log::error('Errore invio mail: ' . $e->getMessage());
+            Log::error('Errore invio mail: ' . $e->getMessage());
         }
 
         return response()->json(['message' => 'Messaggio inviato con successo']);
