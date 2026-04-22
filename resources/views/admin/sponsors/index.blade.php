@@ -10,20 +10,18 @@
                 </p>
             </div>
         </div>
-        <div class="row my-3">
-            <div class="col d-flex justify-content-around">
-                @foreach ($sponsors as $sponsor)
-                    <div
-                        class="card text-center w-25 {{ $sponsor->name === 'Plus' ? 'border-danger border-2 shadow-lg' : '' }}">
-
-
+        <div class="row my-3  d-flex justify-content-center">
+            @foreach ($sponsors as $sponsor)
+                <div class="col-12 col-lg-6 col-xl-4 my-3">
+                    <div class="card {{ $sponsor->name === 'Plus' ? 'border-danger border-2 shadow-lg' : '' }}"
+                        style="min-height: 300px">
                         @if ($sponsor->name === 'plus')
                             <div class="text-center pt-2">
                                 <span class="badge bg-danger"><i class="fa-solid fa-star"></i> Più popolare</span>
                             </div>
                         @endif
 
-                        <div class="card-body">
+                        <div class="card-body  d-flex align-items-center justify-content-center flex-column">
                             <h3 class="card-title text-capitalize text-danger">
                                 <strong>{{ $sponsor->name }}</strong>
                             </h3>
@@ -44,8 +42,8 @@
                             </a>
                         </div>
                     </div>
-                @endforeach
-            </div>
+                </div>
+            @endforeach
         </div>
     </div>
 @endsection

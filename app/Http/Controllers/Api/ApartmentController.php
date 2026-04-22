@@ -10,7 +10,7 @@ class ApartmentController extends Controller
 {
     public function index()
     {
-        $apartments = Apartment::with(['services', 'sponsors'])->get();
+        $apartments = Apartment::with(['services', 'sponsors'])->where('visibility', 1)->get();
         return response()->json([
             'success' => true,
             'apartments' => $apartments,

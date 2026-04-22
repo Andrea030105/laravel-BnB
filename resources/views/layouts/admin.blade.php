@@ -26,14 +26,14 @@
     <div id="app">
 
         <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-2 shadow">
-            <a href="{{ url('http://localhost:5173/') }}">
-                <img src="{{ asset('storage/uploads/Logo_Completo.svg') }}" alt="Logo" style="width: 150px" />
-            </a>
-            <a class="btn btn-danger w-25" href="{{ url('http://localhost:5173/') }}">Home</a>
             <button class="navbar-toggler position-absolute d-md-none collapsed" type="button"
                 data-bs-toggle="collapse" data-bs-target="#sidebarMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <a href="{{ url('http://localhost:5173/') }}">
+                <img src="{{ asset('storage/uploads/Logo_Completo.svg') }}" alt="Logo" style="width: 150px" />
+            </a>
+            <a class="btn btn-danger w-25" href="{{ url('http://localhost:5173/') }}">Home</a>
             <div class="navbar nav">
                 <div class="nav-item text-nowrap ms-2">
                     <a class="btn btn-danger" href="{{ route('logout') }}"
