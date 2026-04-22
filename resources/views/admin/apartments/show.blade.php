@@ -23,22 +23,25 @@
             <div class="col-12 my-3">
                 <div class="card">
                     <div class="row g-0">
-                        <div class="col-md-4 p-2">
-                            <img src="{{ asset('storage/' . $apartment->image) }}" class="img-fluid rounded-1"
-                                alt="...">
+                        <div class="col-md-4 p-2 ">
+                            <img src="{{ asset('storage/' . $apartment->image) }}" class="rounded-1" alt="img-1">
                         </div>
                         <div class="col-md-8 d-flex justify-content-center align-items-center">
                             <div class="card-body">
                                 <h3 class="card-title">{{ $apartment->title }}</h3>
                                 <p class="card-text">{{ $apartment->description }}</p>
                                 <div class="my-3 d-flex align-items-center">
+                                    <h5><strong>Indirizzo:</strong></h5>
+                                    <p class="card-text text-capitalize mx-2">{{ $apartment->address }}</p>
+                                </div>
+                                <div class="my-3 d-flex align-items-center">
                                     <h5><strong>Servizi:</strong></h5>
                                     @if ($apartment->services->isEmpty())
-                                        <span class="ms-3 badge text-bg-primary rounded-pill">Nulla
+                                        <span class="ms-3 badge badge-red  rounded-pill">Nulla
                                         </span>
                                     @else
                                         @foreach ($apartment->services as $service)
-                                            <span class="ms-3 badge text-bg-primary rounded-pill">{{ $service->name }}
+                                            <span class="ms-3 badge badge-red  rounded-pill">{{ $service->name }}
                                             </span>
                                         @endforeach
                                     @endif
@@ -48,29 +51,26 @@
                                         <h5><strong>Info:</strong></h5>
                                         <li class=" px-5 list-group-item d-flex justify-content-between align-items-center">
                                             <strong>Camere:</strong>
-                                            <span
-                                                class="ms-3 badge text-bg-primary rounded-pill">{{ $apartment->rooms }}</span>
+                                            <span class="ms-3 badge badge-red  rounded-pill">{{ $apartment->rooms }}</span>
                                         </li>
                                         <li class=" px-5 list-group-item d-flex justify-content-between align-items-center">
                                             <strong>Camere da Letto:</strong>
-                                            <span
-                                                class="ms-3 badge text-bg-primary rounded-pill">{{ $apartment->rooms }}</span>
+                                            <span class="ms-3 badge badge-red  rounded-pill">{{ $apartment->rooms }}</span>
                                         </li>
                                         <li class=" px-5 list-group-item d-flex justify-content-between align-items-center">
                                             <strong>Bagni:</strong>
-                                            <span
-                                                class="ms-3 badge text-bg-primary rounded-pill">{{ $apartment->rooms }}</span>
+                                            <span class="ms-3 badge badge-red  rounded-pill">{{ $apartment->rooms }}</span>
                                         </li>
                                         <li class=" px-5 list-group-item d-flex justify-content-between align-items-center">
                                             <strong>Metri Queadraati:</strong>
                                             <span
-                                                class="ms-3 badge text-bg-primary rounded-pill">{{ $apartment->square_meters }}
+                                                class="ms-3 badge badge-red  rounded-pill">{{ $apartment->square_meters }}
                                                 <i class="fa-solid fa-ruler-combined"></i>
                                             </span>
                                         </li>
                                         <li class=" px-5 list-group-item d-flex justify-content-between align-items-center">
                                             <strong>Visibile:</strong>
-                                            <span class="ms-3 badge text-bg-primary rounded-pill">
+                                            <span class="ms-3 badge badge-red  rounded-pill">
                                                 @if ($apartment->visibility == 1)
                                                     Si
                                                 @else
@@ -80,7 +80,7 @@
                                         </li>
                                         <li class=" px-5 list-group-item d-flex justify-content-between align-items-center">
                                             <strong>Prezzo:</strong>
-                                            <span class="ms-3 badge text-bg-primary rounded-pill">
+                                            <span class="ms-3 badge badge-red  rounded-pill">
                                                 {{ $apartment->price_per_night }}
                                                 <i class="fa-solid fa-euro-sign"></i>
                                             </span>

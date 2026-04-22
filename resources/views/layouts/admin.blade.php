@@ -53,6 +53,12 @@
                     <div class="position-sticky pt-3">
                         <ul class="nav flex-column">
                             <li class="nav-item my-2">
+                                <a class="btn btn-danger w-100 {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('admin.dashboard') }}">
+                                    <i class="fa-solid fa-chart-column"></i> DashBoard
+                                </a>
+                            </li>
+                            <li class="nav-item my-2">
                                 <a class="btn btn-danger w-100 {{ Route::currentRouteName() == 'admin.apartments.index' ? 'bg-secondary' : '' }}"
                                     href="{{ route('admin.apartments.index') }}">
                                     <i class="fa-solid fa-newspaper fa-lg fa-fw"></i> Apartments

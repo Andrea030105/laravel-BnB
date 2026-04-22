@@ -1,0 +1,28 @@
+@use "./variables" as *;
+
+@mixin btn-login {
+    background-color: $clRed;
+    color: $clWhite;
+
+    &:hover {
+        background-color: $clRedHover;
+    }
+}
+
+@mixin badge-red {
+    background-color: $clRed;
+    color: $clWhite;
+
+    &:hover {
+        background-color: $clRedHover;
+    }
+}
+@mixin badge-card-gray {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ddd;
+
+    &:hover {
+        background-color: #b6b3b3;
+    }
+}

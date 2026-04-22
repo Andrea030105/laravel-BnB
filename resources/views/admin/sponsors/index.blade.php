@@ -3,7 +3,7 @@
     <div class="container-fluid my-3">
         <div class="row">
             <div class="col text-center">
-                <h2 class=" text-primary mb-3">Le Nostre Sponsor</h2>
+                <h2 class="text-danger mb-3"><strong>Le Nostre Sponsor</strong></h2>
                 <p>
                     Queste sono le tipologie di sponsorizzazione che offriamo. Attivandole, potrai mettere in evidenza il
                     tuo appartamento, aumentando così le possibilità di affittarlo.
@@ -13,9 +13,20 @@
         <div class="row my-3">
             <div class="col d-flex justify-content-around">
                 @foreach ($sponsors as $sponsor)
-                    <div class="card text-center w-25">
+                    <div
+                        class="card text-center w-25 {{ $sponsor->name === 'Plus' ? 'border-danger border-2 shadow-lg' : '' }}">
+
+
+                        @if ($sponsor->name === 'plus')
+                            <div class="text-center pt-2">
+                                <span class="badge bg-danger"><i class="fa-solid fa-star"></i> Più popolare</span>
+                            </div>
+                        @endif
+
                         <div class="card-body">
-                            <h3 class="card-title text-capitalize text-danger"><strong>{{ $sponsor->name }}</strong></h3>
+                            <h3 class="card-title text-capitalize text-danger">
+                                <strong>{{ $sponsor->name }}</strong>
+                            </h3>
                             <div class="d-flex justify-content-center">
                                 <p class="card-text mx-2"><strong>Durata dello Sponsor:</strong></p>
                                 <p>{{ $sponsor->hours }} h</p>
@@ -25,9 +36,11 @@
                                 <p>{{ $sponsor->price }} <i class="fa-solid fa-euro-sign"></i></p>
                             </div>
                         </div>
+
                         <div class="card-footer text-body-secondary">
                             <a href="{{ route('admin.sponsors.payment', ['sponsor' => $sponsor->id, 'apartment' => $apartment->id]) }}"
-                                class="btn btn-primary">Attiva Sponsor
+                                class="btn btn-principal w-100">
+                                Attiva Sponsor
                             </a>
                         </div>
                     </div>

@@ -83,13 +83,13 @@
                         </div>
                         <div class="row g-0">
                             <div class="col-md-4 p-2">
-                                <img src="{{ asset('storage/' . $apartment->image) }}" class="img-fluid rounded-1"
+                                <img src="{{ asset('storage/' . $apartment->image) }}" class="img-index-dash rounded-1"
                                     alt="{{ $apartment->title }}">
                             </div>
                             <div class="col-md-8 d-flex justify-content-center align-items-center">
                                 <div class="card-body">
                                     <h3 class="card-title">{{ $apartment->title }}</h3>
-                                    <p class="card-text">{{ $apartment->description }}</p>
+                                    <p class="card-text text-index-dash">{{ $apartment->description }}</p>
                                 </div>
                             </div>
                         </div>
